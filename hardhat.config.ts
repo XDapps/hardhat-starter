@@ -11,29 +11,12 @@ import "@openzeppelin/hardhat-upgrades";
 import "@typechain/hardhat";
 import "hardhat-gas-reporter";
 
-const chainIds = {
-  coston: 16,
-  ganache: 1337,
-  goerli: 5,
-  hardhat: 31337,
-  kovan: 42,
-  mainnet: 1,
-  rinkeby: 4,
-  ropsten: 3,
-  songbird: 19,
-  flare: 14,
-  mumbai: 80001,
-  xrpEVM: 1440001
-};
 
 const MNEMONIC = process.env.MNEMONIC || "";
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || "";
 const INFURA_API_KEY = process.env.INFURA_API_KEY || "";
-const COSTON_RPC_URL = process.env.COSTON_RPC_URL_HTTP || "";
 const sgbURL: string = "https://songbird-api.flare.network/ext/C/rpc";
-const flareURL: string = "http://54.205.157.186:9650/ext/bc/C/rpc";
-const costonURL: string = "https://coston-api.flare.network/ext/bc/C/rpc";
-const mumbaiURL: string = "https://polygon-mumbai-bor.publicnode.com";
+const flareURL: string = "https://flare-api.flare.network/ext/bc/C/rpc";
 
 
 function createInfuraConfig(network: string, chainId: number): NetworkUserConfig {
@@ -107,28 +90,27 @@ const config: HardhatUserConfig = {
   networks: {
     hardhat: {
       //  forking: {
-       //   url: "https://goerli.infura.io/v3/33f6cca2bd884901ac2b121e9f479ebc"
+      //   url: "https://goerli.infura.io/v3/33f6cca2bd884901ac2b121e9f479ebc"
       //  },
       accounts: {
         mnemonic: MNEMONIC,
       },
-      chainId: chainIds.hardhat,
+      chainId: 31337,
     },
     eth: createInfuraConfig("mainnet", 1),
     ethfork: createInfuraForkConfig("mainnet", 1),
     goerli: createInfuraConfig("goerli", 5),
     goerlifork: createInfuraForkConfig("goerli", 5),
-    kovan: createInfuraConfig("kovan", 42),
-    kovanfork: createInfuraForkConfig("kovan", 42),
+    mumbai: createInfuraConfig("polygon-mumbai", 80001),
+    mumbaifork: createInfuraForkConfig("polygon-mumbai", 80001),
+    polygon: createInfuraConfig("polygon-mainnet", 137),
+    polygonfork: createInfuraForkConfig("polygon-mainnet", 137),
     sepolia: createInfuraConfig("sepolia", 11155111),
     sepoliafork: createInfuraForkConfig("sepolia", 11155111),
-    ropsten: createInfuraConfig("ropsten", 3),
-    ropstenfork: createInfuraForkConfig("ropsten", 3),
     sb: createCustomRPCConfig(19, sgbURL),
-    sbFork: createCustomRPCForkConfig(19, sgbURL),
-    coston: createCustomRPCConfig(16, costonURL),
+    sbfork: createCustomRPCForkConfig(19, sgbURL),
     flare: createCustomRPCConfig(14, flareURL),
-    mumbai: createCustomRPCConfig(80001, mumbaiURL)
+    flarefork: createCustomRPCForkConfig(14, flareURL)
   },
   solidity: {
     compilers: [

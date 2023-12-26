@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { ethers } from "hardhat";
+import { ethers, upgrades } from "hardhat";
 
 
 
@@ -9,8 +9,8 @@ describe("Deployment", async function () {
   it("Should Deploy The Contract", async function () {
     const [owner] = await ethers.getSigners();
     console.log("Deploying contracts with the account:", owner.address);
-    const TestTokenFactory = await ethers.getContractFactory("TestToken");
-    const contract = await TestTokenFactory.deploy("Test Token", "TT");
+    const TestTokenUpgradeableFactory = await ethers.getContractFactory("TestTokenUpgradeable");
+    const contract = await upgrades.deployProxy(TestTokenUpgradeableFactory, ["Test Token Upgradeable", "TTU"], { initializer: 'initializeContract' });
     testAddress = await contract.getAddress();
     console.log("Contract deployed to address:", testAddress);
     console.log("Checking balance before mint");

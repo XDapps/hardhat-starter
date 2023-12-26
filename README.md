@@ -1,6 +1,8 @@
 # Sample Hardhat Project
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+This project demonstrates a basic Hardhat use case. It comes with a sample contract in standard and upgradeable forms, a test for that contract, a script that deploys that contract, and an upgrade script.
+
+Please see example.env file and recreate a .env in the same format.
 
 Try running some of the following tasks:
 
