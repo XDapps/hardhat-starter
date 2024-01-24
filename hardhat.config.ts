@@ -4,6 +4,7 @@ dotenvConfig({ path: resolve(__dirname, "./.env") });
 
 import { HardhatUserConfig } from "hardhat/types";
 import { NetworkUserConfig } from "hardhat/types";
+import "@nomicfoundation/hardhat-verify";
 import "@nomicfoundation/hardhat-ethers";
 import "@nomicfoundation/hardhat-toolbox";
 import "@nomicfoundation/hardhat-network-helpers";
